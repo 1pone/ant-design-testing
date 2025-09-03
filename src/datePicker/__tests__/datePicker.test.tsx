@@ -3,6 +3,7 @@ import { render, waitFor } from '@testing-library/react';
 import { DatePicker } from 'antd';
 import dayjs from 'dayjs';
 
+import { testFn } from '../../testFramework';
 import * as datePicker from '..';
 
 const dateAdaptor = dayjs;
@@ -40,7 +41,7 @@ describe("Test DatePicker's fire functions", () => {
      * @link queryDropdown
      */
     test('queryDropdown', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(
             <DatePicker
                 onChange={fn}
@@ -69,7 +70,7 @@ describe("Test DatePicker's fire functions", () => {
      * @link fireOpen
      */
     test('fireOpen', async () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<DatePicker onOpenChange={fn} />);
         datePicker.fireOpen(container);
         expect(fn).toBeCalledTimes(1);
@@ -79,8 +80,8 @@ describe("Test DatePicker's fire functions", () => {
      * @link fireClose
      */
     test('fireClose', async () => {
-        const fn1 = jest.fn();
-        const fn2 = jest.fn();
+        const fn1 = testFn();
+        const fn2 = testFn();
         const { container } = render(<DatePicker onOpenChange={(isOpen) => (isOpen ? fn1() : fn2())} />);
         datePicker.fireOpen(container);
         expect(fn1).toBeCalled();
@@ -95,7 +96,7 @@ describe("Test DatePicker's fire functions", () => {
      * @link firePanelChange
      */
     test('firePanelChange', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(
             <DatePicker
                 onPanelChange={fn}
@@ -109,7 +110,7 @@ describe("Test DatePicker's fire functions", () => {
     });
 
     test('firePanelChange with certain button', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(
             <DatePicker
                 onPanelChange={fn}
@@ -141,7 +142,7 @@ describe("Test DatePicker's fire functions", () => {
      * @link fireChange
      */
     test('fireChange', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(
             <DatePicker
                 onChange={fn}
@@ -156,7 +157,7 @@ describe("Test DatePicker's fire functions", () => {
     });
 
     test('fireCalendarChange', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(
             <DatePicker.RangePicker
                 onCalendarChange={fn}
@@ -174,7 +175,7 @@ describe("Test DatePicker's fire functions", () => {
      * @link fireOk
      */
     test('fireOk', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(
             <DatePicker
                 showTime

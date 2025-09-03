@@ -3,6 +3,7 @@ import { render } from '@testing-library/react';
 import { Table } from 'antd';
 import type { ColumnType } from 'antd/lib/table';
 
+import { testFn } from '../../testFramework';
 import * as table from '..';
 
 const columns: ColumnType<(typeof dataSource)[number]>[] = [
@@ -67,7 +68,7 @@ describe("Test Table's fire functions", () => {
      * @link fireSelect
      */
     test('fireSelect', () => {
-        const handleSelect = jest.fn();
+        const handleSelect = testFn();
         const { container } = render(
             <Table
                 rowKey="id"
@@ -86,7 +87,7 @@ describe("Test Table's fire functions", () => {
      * @link fireSelectAll
      */
     test('fireSelectAll', () => {
-        const handleSelect = jest.fn();
+        const handleSelect = testFn();
         const { container } = render(
             <Table
                 rowKey="id"
@@ -105,7 +106,7 @@ describe("Test Table's fire functions", () => {
      * @link fireExpand
      */
     test('fireExpand', () => {
-        const handleExpand = jest.fn();
+        const handleExpand = testFn();
         const { container } = render(
             <Table
                 rowKey="id"

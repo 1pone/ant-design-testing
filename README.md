@@ -1,8 +1,8 @@
 <div align="center">ant-design-testing</div>
 
-_Easier testing for ant-design-based UI library_
+_Easier testing for ant-design-based UI library with Jest and Vitest support_
 
-This library is based on `Jest` and `React-Testing-Library`
+This library is based on `React-Testing-Library` and supports both `Jest` and `Vitest` testing frameworks
 
 ## Usage
 
@@ -17,22 +17,61 @@ $ yarn add ant-design-testing -D
 $ pnpm add ant-design-testing -D
 ```
 
-Then, modify the prefixCls if you need it, default prefixCls is `ant`
+Then, configure the library in your test setup file:
 
 ```tsx
 // setupTests.ts
 import { provider } from 'ant-design-testing';
 
-provider({ prefixCls: 'ant' });
+// Configure prefix class (default: 'ant')
+// Configure test framework (default: 'jest')
+provider({ 
+    prefixCls: 'ant',
+    testFramework: 'jest' // or 'vitest'
+});
 ```
+
+### For Jest Users
+
+No additional setup required. The library defaults to Jest compatibility.
+
+### For Vitest Users
+
+Configure Vitest in your setup:
+
+```tsx
+// setupTests.ts
+import { provider } from 'ant-design-testing';
+
+provider({ 
+    prefixCls: 'ant',
+    testFramework: 'vitest'
+});
+```
+
+Or create a `vitest.config.js`:
+
+```js
+import { defineConfig } from 'vitest/config';
+
+export default defineConfig({
+    test: {
+        environment: 'jsdom',
+        setupFiles: ['./tests/setupTests.ts'],
+        globals: true,
+    },
+});
+```
+
+## Basic Usage
 
 ```tsx
 // yourInput.test.tsx
-import { input } from 'ant-design-testing';
+import { input, testFn } from 'ant-design-testing';
 
 describe("Test input's fire functions", () => {
     test('fireChange', () => {
-        const fn = jest.fn();
+        const fn = testFn(); // Framework-agnostic mock function
         const { container } = render(<Input onChange={fn} />);
         input.fireChange(container, 'test');
         expect(fn).toBeCalled();
@@ -41,6 +80,7 @@ describe("Test input's fire functions", () => {
 ```
 
 Otherwise, you can use query to find ant-design element quickly, like this
+
 ```tsx
 // yourInput.test.tsx
 import { input } from 'ant-design-testing';
@@ -56,6 +96,7 @@ test('query', () => {
 ```
 
 A simple example form demo, like this
+
 ```tsx
 // your form Component
 const MyForm = ({ onSubmit }: any) => {
@@ -85,12 +126,13 @@ const MyForm = ({ onSubmit }: any) => {
     );
 };
 ```
+
 ```tsx
 // your test file
-import { select, input, button } from 'ant-design-testing';
+import { select, input, button, testFn } from 'ant-design-testing';
 
 it('test MyForm', () => {
-    const fn = jest.fn();
+    const fn = testFn(); // Framework-agnostic mock function
     const { container } = render(
         <MyForm onSubmit={fn}/>
     );
@@ -107,7 +149,9 @@ it('test MyForm', () => {
     expect(fn).toBeCalledWith({username: 'zhangsan', password: '123456', role: 'admin'});
 });
 ```
+
 All query methods support chain calling
+
 ```tsx
 // basic usage
 const userName = input.query(container)!;
@@ -118,5 +162,89 @@ input.fireChange(password, '123456');
 // chain usage
 input.query(container)?.fireChange('zhangsan');
 input.query(container, 1)?.fireChange('123456');
+```
 
+## Test Framework Agnostic APIs
+
+The library provides framework-agnostic APIs that work with both Jest and Vitest:
+
+### Mock Functions
+
+```tsx
+import { testFn } from 'ant-design-testing';
+
+const mockFn = testFn(); // Works with both Jest and Vitest
+```
+
+### Timer Control
+
+```tsx
+import { useFakeTimers, useRealTimers, runAllTimers, advanceTimersByTime } from 'ant-design-testing';
+
+// Setup fake timers
+useFakeTimers();
+
+// Advance timers
+runAllTimers();
+advanceTimersByTime(1000);
+
+// Restore real timers
+useRealTimers();
+```
+
+### Spy Functions
+
+```tsx
+import { spyOn } from 'ant-design-testing';
+
+const spy = spyOn(console, 'log');
+```
+
+## Migration from Jest-only Code
+
+If you have existing Jest-specific code, you can use our migration script:
+
+```bash
+npm run migrate-tests
+```
+
+This script will automatically update your test files to use framework-agnostic APIs.
+
+## Framework Configuration
+
+### Jest Configuration (jest.config.js)
+
+```js
+module.exports = {
+    setupFilesAfterEnv: ['./tests/setupTests.ts'],
+    testEnvironment: 'jsdom',
+    // ... other Jest config
+};
+```
+
+### Vitest Configuration (vitest.config.js)
+
+```js
+import { defineConfig } from 'vitest/config';
+
+export default defineConfig({
+    test: {
+        environment: 'jsdom',
+        setupFiles: ['./tests/setupTests.ts'],
+        globals: true,
+    },
+});
+```
+
+## Running Tests
+
+```bash
+# Run with Jest
+npm run test:jest
+
+# Run with Vitest
+npm run test:vitest
+
+# Default (Jest)
+npm test
 ```

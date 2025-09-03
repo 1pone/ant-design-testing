@@ -2,6 +2,7 @@ import { act, fireEvent } from '@testing-library/react';
 
 import type { IContainer } from '../interface';
 import { getProvider } from '../provider';
+import { runAllTimers } from '../testFramework';
 import { failedQuerySelector, mixinElementWithTestFuncs, queryViaSelector } from '../utils';
 
 const mixins = {
@@ -15,7 +16,7 @@ const mixins = {
  * Fires onChange function
  *
  * It's a async fire function
- * @prerequisite call `jest.useFakeTimers()`
+ * @prerequisite call `useFakeTimers()` from ant-design-testing
  */
 export function fireUpload(container: IContainer, files: File[] | { name: string }[]) {
     const selector = `.${getProvider('prefixCls')}-upload input[type='file']`;
@@ -23,7 +24,7 @@ export function fireUpload(container: IContainer, files: File[] | { name: string
     if (!ele) throw failedQuerySelector(selector);
     fireEvent.change(ele, { target: { files } });
     act(() => {
-        jest.runAllTimers();
+        runAllTimers();
     });
 }
 

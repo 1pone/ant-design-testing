@@ -3,17 +3,18 @@ import { render } from '@testing-library/react';
 import { TimePicker } from 'antd';
 import dayjs from 'dayjs';
 
+import { testFn, useFakeTimers, useRealTimers } from '../../testFramework';
 import * as timePicker from '..';
 
 const dateAdaptor = dayjs;
 
 describe("Test TimePicker's fire functions", () => {
     beforeEach(() => {
-        jest.useFakeTimers();
+        useFakeTimers();
         document.body.innerHTML = '';
     });
     afterEach(() => {
-        jest.useRealTimers();
+        useRealTimers();
     });
 
     /**
@@ -46,7 +47,7 @@ describe("Test TimePicker's fire functions", () => {
      * @link fireOk
      */
     test('fireOk', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(
             <TimePicker
                 defaultValue={dateAdaptor('00:00:00', 'HH:mm:ss')}
@@ -64,7 +65,7 @@ describe("Test TimePicker's fire functions", () => {
      * @link fireOpen
      */
     test('fireOpen', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(
             <TimePicker onOpenChange={fn} defaultValue={dateAdaptor('00:00:00', 'HH:mm:ss')} />
         );
@@ -77,7 +78,7 @@ describe("Test TimePicker's fire functions", () => {
      * @link fireChange
      */
     test('fireChange', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(
             <TimePicker
                 onChange={fn}
@@ -92,7 +93,7 @@ describe("Test TimePicker's fire functions", () => {
     });
 
     test('fireChange with RangePicker', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(
             <TimePicker.RangePicker onChange={fn} getPopupContainer={(node) => node.parentElement!} />
         );

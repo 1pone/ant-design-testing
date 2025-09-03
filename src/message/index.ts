@@ -2,6 +2,7 @@ import { act, fireEvent } from '@testing-library/react';
 
 import { IContainer } from '../interface';
 import { getProvider } from '../provider';
+import { advanceTimersByTime } from '../testFramework';
 import { failedQuerySelector, mixinElementWithTestFuncs, queryViaSelector } from '../utils';
 
 const mixins = {
@@ -15,7 +16,7 @@ const mixins = {
  */
 export function fireClick(container: IContainer) {
     const ele = queryContent(container);
-    if (!ele) throw failedQuerySelector(`.${getProvider('prefixCls')}-notice-content`);
+    if (!ele) throw failedQuerySelector(`.${getProvider('prefixCls')}-message-notice-content`);
     fireEvent.click(ele);
 }
 
@@ -29,8 +30,11 @@ export async function fireClose(duration = 3000) {
         await Promise.resolve();
     }
 
-    act(() => {
-        jest.advanceTimersByTime(duration);
+    // Use act to wrap timer advancement for both Jest and Vitest
+    await act(async () => {
+        advanceTimersByTime(duration);
+        // Allow React to process the timer advancement
+        await Promise.resolve();
     });
 }
 

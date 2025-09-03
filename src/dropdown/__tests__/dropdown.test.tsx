@@ -2,6 +2,7 @@ import React from 'react';
 import { render, waitFor } from '@testing-library/react';
 import { Dropdown } from 'antd';
 
+import { testFn, useFakeTimers, useRealTimers } from '../../testFramework';
 import * as dropdown from '..';
 
 const items = [
@@ -11,18 +12,18 @@ const items = [
 
 describe("Test Dropdown's fire functions", () => {
     beforeEach(() => {
-        jest.useFakeTimers();
+        useFakeTimers();
     });
 
     afterEach(() => {
-        jest.useRealTimers();
+        useRealTimers();
     });
 
     /**
      * @link fireOpen
      */
     test('test fireOpen', async () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(
             <Dropdown menu={{ items }} onOpenChange={fn} trigger={['click', 'hover', 'contextMenu']}>
                 <a>button</a>
@@ -40,7 +41,7 @@ describe("Test Dropdown's fire functions", () => {
      * @link fireSelect
      */
     test('test fireSelect', async () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(
             <Dropdown menu={{ items, onClick: fn }} getPopupContainer={(trigger) => trigger.parentElement!}>
                 <a>button</a>
@@ -55,7 +56,7 @@ describe("Test Dropdown's fire functions", () => {
      * @link fireCloseWithESC
      */
     test('test fireCloseWithESC', async () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(
             <Dropdown menu={{ items }} onOpenChange={(open) => !open && fn()}>
                 <a>button</a>
@@ -89,7 +90,7 @@ describe("Test Dropdown's fire functions", () => {
      * @link queryDropdownMenuItem
      */
     test('test queryDropdownMenuItem', async () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(
             <Dropdown
                 menu={{

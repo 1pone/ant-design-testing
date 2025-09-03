@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { Transfer } from 'antd';
 
+import { testFn, useFakeTimers } from '../../testFramework';
 import * as transfer from '..';
 
 const dataSource = [
@@ -12,7 +13,7 @@ const dataSource = [
 
 describe("Test Transfer's fire functions", () => {
     beforeEach(() => {
-        jest.useFakeTimers();
+        useFakeTimers();
     });
 
     /**
@@ -35,7 +36,7 @@ describe("Test Transfer's fire functions", () => {
      * @link fireChange
      */
     test('fireChange', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(
             <Transfer dataSource={dataSource} selectedKeys={['a']} targetKeys={['b', 'c']} onChange={fn} />
         );
@@ -44,7 +45,7 @@ describe("Test Transfer's fire functions", () => {
     });
 
     test('fireChange with left direction', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(
             <Transfer dataSource={dataSource} selectedKeys={['b', 'c']} targetKeys={['b', 'c']} onChange={fn} />
         );
@@ -56,7 +57,7 @@ describe("Test Transfer's fire functions", () => {
      * @link fireScroll
      */
     test('fireScroll', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<Transfer listStyle={{ height: 30 }} dataSource={dataSource} onScroll={fn} />);
         transfer.fireScroll(container);
         expect(fn).toBeCalled();
@@ -66,7 +67,7 @@ describe("Test Transfer's fire functions", () => {
      * @link fireSearch
      */
     test('fireSearch', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(
             <Transfer
                 dataSource={dataSource}

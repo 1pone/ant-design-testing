@@ -3,6 +3,7 @@ import { render } from '@testing-library/react';
 import { Modal } from 'antd';
 
 import { getProvider } from '../../provider';
+import { testFn, useFakeTimers, useRealTimers } from '../../testFramework';
 import * as confirm from '../confirm';
 
 function Confirm({ onOk, onCancel }: any) {
@@ -23,12 +24,12 @@ function Confirm({ onOk, onCancel }: any) {
 
 describe("Test confirm's fire functions", () => {
     beforeEach(() => {
-        jest.useFakeTimers();
+        useFakeTimers();
         document.body.innerHTML = '';
     });
 
     afterEach(() => {
-        jest.useRealTimers();
+        useRealTimers();
     });
 
     /**
@@ -53,7 +54,7 @@ describe("Test confirm's fire functions", () => {
      * @link queryCancelButton
      */
     test('queryCancelButton', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { getByTestId } = render(<Confirm onCancel={fn} />);
         confirm.fireOpen(getByTestId('trigger'));
         confirm.fireCancel(confirm.queryCancelButton(document)!);
@@ -64,7 +65,7 @@ describe("Test confirm's fire functions", () => {
      * @link queryOkButton
      */
     test('queryOkButton', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { getByTestId } = render(<Confirm onOk={fn} />);
         confirm.fireOpen(getByTestId('trigger'));
         confirm.fireOk(confirm.queryOkButton(document)!);
@@ -75,7 +76,7 @@ describe("Test confirm's fire functions", () => {
      * @link fireOpen
      */
     test('fireOpen', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { getByTestId } = render(<Confirm onOk={fn} />);
         confirm.fireOpen(getByTestId('trigger'));
 
@@ -86,7 +87,7 @@ describe("Test confirm's fire functions", () => {
      * @link fireOk
      */
     test('fireOk', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { getByTestId } = render(<Confirm onOk={fn} />);
         confirm.fireOpen(getByTestId('trigger'));
         confirm.fireOk(document.body);
@@ -97,7 +98,7 @@ describe("Test confirm's fire functions", () => {
      * @link fireCancel
      */
     test('fireCancel', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { getByTestId } = render(<Confirm onCancel={fn} />);
         confirm.fireOpen(getByTestId('trigger'));
         confirm.fireCancel(document.body);

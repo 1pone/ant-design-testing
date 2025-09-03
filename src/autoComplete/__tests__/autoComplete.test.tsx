@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { AutoComplete } from 'antd';
 
+import { testFn } from '../../testFramework';
 import * as autoComplete from '..';
 
 describe('Test Select fire functions', () => {
@@ -23,8 +24,8 @@ describe('Test Select fire functions', () => {
      * @link querySelectorWrapper
      */
     test('querySelectorWrapper', () => {
-        const fn1 = jest.fn();
-        const fn2 = jest.fn();
+        const fn1 = testFn();
+        const fn2 = testFn();
         const { container } = render(
             <>
                 <AutoComplete onDropdownVisibleChange={fn1} />
@@ -41,8 +42,8 @@ describe('Test Select fire functions', () => {
      * @link queryDropdown
      */
     test('queryDropdown', () => {
-        const fn1 = jest.fn();
-        const fn2 = jest.fn();
+        const fn1 = testFn();
+        const fn2 = testFn();
         const { container } = render(
             <>
                 <AutoComplete options={[{ label: '1', value: '1' }]} onSelect={fn1} />
@@ -80,8 +81,8 @@ describe('Test Select fire functions', () => {
      * @link queryClear
      */
     test('queryClear', () => {
-        const fn1 = jest.fn();
-        const fn2 = jest.fn();
+        const fn1 = testFn();
+        const fn2 = testFn();
         const { container } = render(
             <>
                 <AutoComplete onClear={fn1} value={1} allowClear options={[{ label: 'a', value: 'a' }]} />
@@ -114,7 +115,7 @@ describe('Test Select fire functions', () => {
      * @link fireOpen
      */
     test('fireOpen', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(
             <AutoComplete onDropdownVisibleChange={fn} options={[{ label: 'a', value: 'a' }]} />
         );
@@ -126,7 +127,7 @@ describe('Test Select fire functions', () => {
      * @link fireSelect
      */
     test('fireSelect', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(
             <AutoComplete
                 onChange={fn}
@@ -143,7 +144,7 @@ describe('Test Select fire functions', () => {
      * @link fireSearch
      */
     test('fireSearch', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<AutoComplete onSearch={fn} showSearch options={[{ label: 'a', value: 'a' }]} />);
         autoComplete.fireSearch(container, 'test');
         expect(fn).toBeCalled();
@@ -153,7 +154,7 @@ describe('Test Select fire functions', () => {
      * @link fireFocus
      */
     test('fireFocus', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<AutoComplete onFocus={fn} options={[{ label: 'a', value: 'a' }]} />);
         autoComplete.fireFocus(container);
         expect(fn).toBeCalled();
@@ -163,7 +164,7 @@ describe('Test Select fire functions', () => {
      * @link fireBlur
      */
     test('fireBlur', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<AutoComplete onBlur={fn} options={[{ label: 'a', value: 'a' }]} />);
         autoComplete.fireFocus(container);
         autoComplete.fireBlur(container);
@@ -174,7 +175,7 @@ describe('Test Select fire functions', () => {
      * @link fireClear
      */
     test('fireClear', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(
             <AutoComplete onClear={fn} defaultValue={1} allowClear options={[{ label: 'a', value: 'a' }]} />
         );

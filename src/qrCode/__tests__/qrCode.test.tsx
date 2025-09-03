@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { QRCode } from 'antd';
 
+import { testFn } from '../../testFramework';
 import * as qrCode from '..';
 
 describe("Test QRCode fire's functions", () => {
@@ -10,8 +11,8 @@ describe("Test QRCode fire's functions", () => {
     const originalError = console.error;
 
     beforeAll(() => {
-        console.log = jest.fn();
-        console.error = jest.fn();
+        console.log = testFn();
+        console.error = testFn();
     });
 
     afterAll(() => {
@@ -31,7 +32,7 @@ describe("Test QRCode fire's functions", () => {
      * @link fireRefresh
      */
     test('fireRefresh', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<QRCode value="http://www.google.com" status="expired" onRefresh={fn} />);
         qrCode.fireRefresh(container);
         expect(fn).toBeCalled();

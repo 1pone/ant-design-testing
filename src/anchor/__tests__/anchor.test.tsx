@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { Anchor } from 'antd';
 
+import { testFn } from '../../testFramework';
 import * as anchor from '..';
 
 describe("Test Anchor's fire functions", () => {
@@ -9,7 +10,7 @@ describe("Test Anchor's fire functions", () => {
      * @link fireClick
      */
     test('test fireClick', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const items = [
             { title: 'a', href: '#a', key: 'a' },
             { title: 'b', href: '#b', key: 'b' },

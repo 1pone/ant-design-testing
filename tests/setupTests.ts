@@ -1,3 +1,4 @@
+// Mock matchMedia for jsdom environment
 Object.defineProperty(global.window, 'matchMedia', {
     writable: true,
     configurable: true,

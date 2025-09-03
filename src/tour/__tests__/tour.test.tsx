@@ -3,6 +3,7 @@ import { render } from '@testing-library/react';
 import { Button, Tour, TourProps } from 'antd';
 
 import { button } from '../../index';
+import { testFn } from '../../testFramework';
 import * as tour from '..';
 
 const TourDemo = ({ onChange, onClose }: any) => {
@@ -57,7 +58,7 @@ describe("Test Tour fire's functions", () => {
      * @link fireNextStep
      */
     test('fireNextStep', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<TourDemo onChange={fn} />);
         button.fireClick(container);
         tour.fireNextStep(document);
@@ -68,7 +69,7 @@ describe("Test Tour fire's functions", () => {
      * @link firePrevStep
      */
     test('firePrevStep', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<TourDemo onChange={fn} />);
         button.fireClick(container);
         tour.fireNextStep(document);
@@ -81,7 +82,7 @@ describe("Test Tour fire's functions", () => {
      * @link fireClose
      */
     test('fireClose', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<TourDemo onClose={fn} />);
         button.fireClick(container);
         tour.fireClose(document);

@@ -3,6 +3,7 @@ import { act, render } from '@testing-library/react';
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
 
+import { testFn } from '../../testFramework';
 import * as menu from '..';
 
 type MenuItems = Required<MenuProps>['items'];
@@ -12,7 +13,7 @@ describe("Test menu fire's functions", () => {
      * @link fireMenuItemClick
      */
     test('fire menu item click', async () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const menuItems: MenuItems = [
             { key: 'Option1', label: 'Option1' },
             { key: 'Option2', label: 'Option2' },
@@ -27,7 +28,7 @@ describe("Test menu fire's functions", () => {
      * @link fireSubMenuClick
      */
     test('fire submenu click', async () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const menuItems: MenuItems = [
             { key: 'Option1', label: 'Option1' },
             {

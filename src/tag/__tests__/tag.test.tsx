@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { Tag } from 'antd';
 
+import { testFn } from '../../testFramework';
 import * as tag from '..';
 
 describe("Test Tag's fire functions", () => {
@@ -9,7 +10,7 @@ describe("Test Tag's fire functions", () => {
      * @link fireClose
      */
     test('test fireClose', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(
             <div>
                 <Tag>tag1</Tag>

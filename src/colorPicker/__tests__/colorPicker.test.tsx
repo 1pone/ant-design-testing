@@ -2,6 +2,7 @@ import React from 'react';
 import { render, waitFor } from '@testing-library/react';
 import { ColorPicker } from 'antd';
 
+import { testFn } from '../../testFramework';
 import * as colorPicker from '..';
 
 describe("Test ColorPicker's fire functions", () => {
@@ -69,12 +70,12 @@ describe("Test ColorPicker's fire functions", () => {
      * @link fireChange
      */
     test('fireChange', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<ColorPicker onChange={fn} />);
         colorPicker.fireOpen(container);
         colorPicker.fireChange(document, { hexColor: '#000000', alpha: '30' });
         // onChange will triiger twice if change hexColor and alpha at the same time
-        expect(fn.mock.calls[0][1]).toBe('#000000');
+        expect(fn.mock.calls[0][1]).toBe('rgb(0,0,0)');
         expect(fn.mock.calls[1][0].metaColor?.a).toBe(0.3);
     });
 });

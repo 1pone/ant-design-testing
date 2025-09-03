@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { Switch } from 'antd';
 
+import { testFn } from '../../testFramework';
 import * as switchEl from '..';
 
 describe("Test Switch's fire functions", () => {
@@ -23,7 +24,7 @@ describe("Test Switch's fire functions", () => {
      * @link fireClick
      */
     test('fireClick', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<Switch onClick={fn} />);
 
         switchEl.fireClick(container);
@@ -34,7 +35,7 @@ describe("Test Switch's fire functions", () => {
      * @link fireChange
      */
     test('fireChange', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<Switch onChange={fn} />);
 
         switchEl.fireChange(container);

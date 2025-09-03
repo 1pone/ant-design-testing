@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { Button } from 'antd';
 
+import { testFn } from '../../testFramework';
 import * as button from '..';
 
 describe("Test Button's fire functions", () => {
@@ -23,8 +24,8 @@ describe("Test Button's fire functions", () => {
      * @link fireClick
      */
     test('test fireClick', () => {
-        const fn1 = jest.fn();
-        const fn2 = jest.fn();
+        const fn1 = testFn();
+        const fn2 = testFn();
         const { container } = render(
             <>
                 <Button onClick={fn1}>Button1</Button>
@@ -39,7 +40,7 @@ describe("Test Button's fire functions", () => {
     });
 
     test('fireClick support dom self', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<Button onClick={fn}>Button</Button>);
         button.fireClick(button.query(container)!);
         expect(fn).toBeCalled();

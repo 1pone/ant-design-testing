@@ -2,21 +2,22 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { Tooltip } from 'antd';
 
+import { testFn, useFakeTimers, useRealTimers } from '../../testFramework';
 import * as tooltip from '..';
 
 describe("test tooltip's fire functions", () => {
     beforeEach(() => {
-        jest.useFakeTimers();
+        useFakeTimers();
     });
     afterEach(() => {
-        jest.useRealTimers();
+        useRealTimers();
     });
 
     /**
      * @link fireOpen
      */
     test('fireOpen', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { getByText, getByTestId } = render(
             <Tooltip title="This's title" getPopupContainer={(node) => node.parentElement!} onOpenChange={fn}>
                 <a data-testid="trigger">trigger</a>
