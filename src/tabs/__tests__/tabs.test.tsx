@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { Tabs, type TabsProps } from 'antd';
 
+import { testFn } from '../../testFramework';
 import * as tabs from '..';
 
 const items: TabsProps['items'] = [
@@ -59,7 +60,7 @@ describe("Test Tabs' fire functions", () => {
      * @link fireChange
      */
     test('fireChange', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<Tabs defaultActiveKey="1" items={items} onChange={fn} />);
         tabs.fireChange(container, '2');
         expect(fn).toBeCalled();
@@ -69,7 +70,7 @@ describe("Test Tabs' fire functions", () => {
      * @link fireClick
      */
     test('fireClick', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<Tabs defaultActiveKey="1" items={items} onTabClick={fn} />);
         tabs.fireClick(container, '1');
         expect(fn).toBeCalled();
@@ -79,7 +80,7 @@ describe("Test Tabs' fire functions", () => {
      * @link fireEdit
      */
     test('fireEdit', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<Tabs defaultActiveKey="1" type="editable-card" items={items} onEdit={fn} />);
         tabs.fireEdit(container, 'add');
         expect(fn).toBeCalledTimes(1);
@@ -89,7 +90,7 @@ describe("Test Tabs' fire functions", () => {
     });
 
     test('fireEdit should throw error', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<Tabs defaultActiveKey="1" type="editable-card" items={items} onEdit={fn} />);
         // @ts-ignore
         expect(() => tabs.fireEdit(container, 'test')).toThrow();

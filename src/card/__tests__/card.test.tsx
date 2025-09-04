@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { Card } from 'antd';
 
+import { testFn } from '../../testFramework';
 import * as card from '..';
 
 describe("Test card's fire functions", () => {
@@ -9,7 +10,7 @@ describe("Test card's fire functions", () => {
      * @link fireTabChange
      */
     test('test fireTabChange', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(
             <Card
                 tabList={[

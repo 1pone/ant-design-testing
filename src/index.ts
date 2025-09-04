@@ -31,6 +31,15 @@ export * as switch from './switch';
 export * as table from './table';
 export * as tabs from './tabs';
 export * as tag from './tag';
+export {
+    advanceTimersByTime,
+    initializeTestFramework,
+    runAllTimers,
+    spyOn,
+    testFn,
+    useFakeTimers,
+    useRealTimers,
+} from './testFramework';
 export * as timePicker from './timePicker';
 export * as tooltip from './tooltip';
 export * as tour from './tour';

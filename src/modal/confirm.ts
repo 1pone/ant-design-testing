@@ -3,18 +3,19 @@ import { act, fireEvent } from '@testing-library/react';
 import * as button from '../button';
 import type { IContainer } from '../interface';
 import { getProvider } from '../provider';
+import { runAllTimers } from '../testFramework';
 import { failedTriggerElement, queryViaSelector } from '../utils';
 import * as modal from './';
 
 /**
  * Open confirm
- * @prerequisite call `jest.useFakeTimers()`
+ * @prerequisite call `useFakeTimers()` from ant-design-testing
  */
 export function fireOpen(ele?: HTMLElement) {
     if (!ele) throw failedTriggerElement();
     fireEvent.click(ele);
     act(() => {
-        jest.runAllTimers();
+        runAllTimers();
     });
 }
 

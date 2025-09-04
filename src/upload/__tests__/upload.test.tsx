@@ -2,22 +2,23 @@ import React from 'react';
 import { render, waitFor } from '@testing-library/react';
 import { Upload, UploadProps } from 'antd';
 
+import { testFn, useFakeTimers, useRealTimers } from '../../testFramework';
 import * as upload from '..';
 
 describe("Test Upload's fire functions", () => {
     beforeEach(() => {
-        jest.useFakeTimers();
+        useFakeTimers();
     });
 
     afterEach(() => {
-        jest.useRealTimers();
+        useRealTimers();
     });
 
     /**
      * @link fireUpload
      */
     test('test fireUpload', async () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const props: UploadProps = {
             beforeUpload: () => false,
             onChange: ({ fileList }) => {
@@ -39,7 +40,7 @@ describe("Test Upload's fire functions", () => {
      * @link fireRemove
      */
     test('test fireRemove', async () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const files = [
             {
                 uid: '-1',

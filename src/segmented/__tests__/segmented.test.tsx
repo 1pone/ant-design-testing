@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { Segmented } from 'antd';
 
+import { testFn } from '../../testFramework';
 import * as segmented from '..';
 
 describe("Test Segmented's fire functions", () => {
@@ -9,7 +10,7 @@ describe("Test Segmented's fire functions", () => {
      * @link fireChange
      */
     test('test fireChange', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<Segmented options={['One', 'Two', 'Three']} onChange={fn} />);
         segmented.fireChange(container, 1);
         expect(fn).toBeCalledWith('Two');

@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { FloatButton } from 'antd';
 
+import { testFn } from '../../testFramework';
 import * as floatButton from '..';
 
 describe("Test FloatButton's fire functions", () => {
@@ -9,8 +10,8 @@ describe("Test FloatButton's fire functions", () => {
      * @link fireClick
      */
     test('test fireClick', () => {
-        const fn1 = jest.fn();
-        const fn2 = jest.fn();
+        const fn1 = testFn();
+        const fn2 = testFn();
         const { container } = render(
             <>
                 <FloatButton onClick={fn1} />

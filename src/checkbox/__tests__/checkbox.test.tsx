@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { Checkbox } from 'antd';
 
+import { testFn } from '../../testFramework';
 import * as checkbox from '..';
 
 describe('Test checkbox', () => {
@@ -37,14 +38,14 @@ describe('Test checkbox', () => {
      * @link queryInput
      */
     test('queryInput', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<Checkbox.Group options={['Apple', 'Pear', 'Orange']} onChange={fn} />);
         checkbox.fireChange(checkbox.queryInput(container)!, 0);
         expect(fn).toBeCalledWith(['Apple']);
     });
 
     test('queryInput via chain', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<Checkbox.Group options={['Apple', 'Pear', 'Orange']} onChange={fn} />);
         checkbox.queryInput(container)?.fireChange(0);
         expect(fn).toBeCalledWith(['Apple']);
@@ -54,7 +55,7 @@ describe('Test checkbox', () => {
      * @link fireChange
      */
     test('fireChange', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<Checkbox.Group options={['Apple', 'Pear', 'Orange']} onChange={fn} />);
         checkbox.fireChange(container, 0);
         expect(fn).toBeCalledWith(['Apple']);

@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { InputNumber } from 'antd';
 
+import { testFn } from '../../testFramework';
 import * as inputNumber from '..';
 
 describe("Test inputNumber's fire functions", () => {
@@ -31,7 +32,7 @@ describe("Test inputNumber's fire functions", () => {
      * @link fireChange
      */
     test('fireChange', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<InputNumber onChange={fn} />);
         inputNumber.fireChange(container, 1);
 
@@ -42,7 +43,7 @@ describe("Test inputNumber's fire functions", () => {
      * @link fireStepUp
      */
     test('fireStepUp', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<InputNumber onStep={fn} defaultValue={1} />);
         inputNumber.fireStepUp(container);
 
@@ -53,7 +54,7 @@ describe("Test inputNumber's fire functions", () => {
      * @link fireStepDown
      */
     test('fireStepDown', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<InputNumber onStep={fn} defaultValue={1} />);
         inputNumber.fireStepDown(container);
 
@@ -64,7 +65,7 @@ describe("Test inputNumber's fire functions", () => {
      * @link fireFocus
      */
     test('fireFocus', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<InputNumber onFocus={fn} />);
         inputNumber.fireFocus(container);
 
@@ -75,7 +76,7 @@ describe("Test inputNumber's fire functions", () => {
      * @link fireBlur
      */
     test('fireBlur', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<InputNumber onBlur={fn} />);
         inputNumber.fireBlur(container);
 
@@ -86,7 +87,7 @@ describe("Test inputNumber's fire functions", () => {
      * @link firePressEnter
      */
     test('firePressEnter', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<InputNumber onPressEnter={fn} />);
         inputNumber.firePressEnter(container);
 

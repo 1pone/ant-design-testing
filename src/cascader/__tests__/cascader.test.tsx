@@ -2,6 +2,7 @@ import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
 import { Cascader } from 'antd';
 
+import { testFn } from '../../testFramework';
 import * as cascader from '..';
 
 const options = [
@@ -42,7 +43,7 @@ describe("Test Cascader's fire functions", () => {
      * @link querySelect
      */
     test('querySelect', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(
             <div>
                 <Cascader onDropdownVisibleChange={fn} />
@@ -60,7 +61,7 @@ describe("Test Cascader's fire functions", () => {
      * @link queryInput
      */
     test('queryInput', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container, getByTestId } = render(
             <div>
                 <Cascader data-testid="cascader1" onSearch={fn} />
@@ -84,7 +85,7 @@ describe("Test Cascader's fire functions", () => {
      * @link fireChange
      */
     test('queryMenu', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         render(<Cascader open options={options} changeOnSelect onChange={fn} />);
         cascader.fireChange(cascader.queryMenu(document)!, 0);
         expect(fn).toBeCalled();
@@ -94,7 +95,7 @@ describe("Test Cascader's fire functions", () => {
      * @link queryMenuItem
      */
     test('queryMenuItem', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         render(<Cascader open options={options} changeOnSelect onChange={fn} />);
         fireEvent.click(cascader.queryMenuItem(document)!);
         expect(fn).toBeCalled();
@@ -104,7 +105,7 @@ describe("Test Cascader's fire functions", () => {
      * @link fireOpen
      */
     test('fireOpen', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<Cascader onDropdownVisibleChange={fn} />);
         cascader.fireOpen(container);
         expect(fn).toBeCalledTimes(1);
@@ -114,7 +115,7 @@ describe("Test Cascader's fire functions", () => {
      * @link fireChange
      */
     test('fireChange', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(
             <Cascader onChange={fn} getPopupContainer={(node) => node.parentNode} options={options} />
         );
@@ -124,7 +125,7 @@ describe("Test Cascader's fire functions", () => {
     });
 
     test('fireChange with hover trigger', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(
             <Cascader
                 onChange={fn}
@@ -142,7 +143,7 @@ describe("Test Cascader's fire functions", () => {
      * @link fireSearch
      */
     test('fireSearch', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(
             <Cascader
                 showSearch={{
@@ -162,7 +163,7 @@ describe("Test Cascader's fire functions", () => {
      * @link fireClear
      */
     test('fireClear', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(
             <Cascader onClear={fn} options={options} allowClear defaultValue={['1', '1-1', '1-1-1']} />
         );
@@ -171,8 +172,8 @@ describe("Test Cascader's fire functions", () => {
     });
 
     test('fireChange with multiple', () => {
-        const fn1 = jest.fn();
-        const fn2 = jest.fn();
+        const fn1 = testFn();
+        const fn2 = testFn();
         const { container } = render(
             <>
                 <Cascader onChange={fn1} getPopupContainer={(node) => node.parentNode} options={options} />

@@ -2,6 +2,7 @@ import { act, fireEvent } from '@testing-library/react';
 import type { IContainer } from 'src/interface';
 
 import { getProvider } from '../provider';
+import { runAllTimers } from '../testFramework';
 import { failedQuerySelector, mixinElementWithTestFuncs, queryViaSelector } from '../utils';
 
 const mixins = {
@@ -21,7 +22,7 @@ export function fireCloseWithESC() {
 
 /**
  * Fires onOpenChange function and open Dropdown
- * @prerequisite call `jest.useFakeTimers()`
+ * @prerequisite call `useFakeTimers()` from ant-design-testing
  */
 export function fireOpen(container: IContainer, trigger: 'hover' | 'click' | 'contextMenu' = 'hover') {
     const selector = `.${getProvider('prefixCls')}-dropdown-trigger`;
@@ -35,7 +36,7 @@ export function fireOpen(container: IContainer, trigger: 'hover' | 'click' | 'co
         fireEvent.mouseEnter(ele);
     }
     act(() => {
-        jest.runAllTimers();
+        runAllTimers();
     });
 }
 

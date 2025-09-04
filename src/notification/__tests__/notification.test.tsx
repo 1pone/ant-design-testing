@@ -2,6 +2,7 @@ import React from 'react';
 import { act, waitFor } from '@testing-library/react';
 import { notification as Notification } from 'antd';
 
+import { testFn } from '../../testFramework';
 import * as notification from '..';
 
 describe("Test Notification's fire functions", () => {
@@ -9,7 +10,7 @@ describe("Test Notification's fire functions", () => {
      * @link fireClick
      */
     test('test fireClick', async () => {
-        const fn = jest.fn();
+        const fn = testFn();
         act(() => {
             Notification.info({
                 message: 'This is a notification message',
@@ -32,7 +33,7 @@ describe("Test Notification's fire functions", () => {
      * @link fireClose
      */
     test('test fireClose', async () => {
-        const fn = jest.fn();
+        const fn = testFn();
         act(() => {
             Notification.info({
                 message: 'This is a notification message',

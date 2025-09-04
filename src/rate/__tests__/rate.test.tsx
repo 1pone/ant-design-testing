@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { Rate } from 'antd';
 
+import { testFn } from '../../testFramework';
 import * as rate from '..';
 
 describe("Test rate's fire functions", () => {
@@ -9,7 +10,7 @@ describe("Test rate's fire functions", () => {
      * @link fireChange
      */
     test('test fireChange', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<Rate allowHalf onChange={fn} />);
         rate.fireChange(container, 3);
         expect(fn).toBeCalledWith(3);
@@ -21,7 +22,7 @@ describe("Test rate's fire functions", () => {
      * @link fireHoverChange
      */
     test('test fireHoverChange', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<Rate allowHalf onHoverChange={fn} />);
         rate.fireHoverChange(container, 3.5);
         expect(fn).toBeCalledWith(3.5);

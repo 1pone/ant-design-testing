@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { Alert } from 'antd';
 
+import { testFn } from '../../testFramework';
 import * as alert from '..';
 
 describe("Test Segmented's fire functions", () => {
@@ -9,7 +10,7 @@ describe("Test Segmented's fire functions", () => {
      * @link fireClose
      */
     test('test fireClose', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<Alert message="Warning Text" type="warning" closable onClose={fn} />);
         alert.fireClose(container);
         expect(fn).toBeCalled();

@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { Radio } from 'antd';
 
+import { testFn } from '../../testFramework';
 import * as radio from '..';
 
 describe("Test Radio's fire functions", () => {
@@ -33,7 +34,7 @@ describe("Test Radio's fire functions", () => {
      * @link fireMouseEnter
      */
     test('fireMouseEnter', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<Radio onMouseEnter={fn}>Radio</Radio>);
 
         radio.fireMouseEnter(container);
@@ -41,7 +42,7 @@ describe("Test Radio's fire functions", () => {
     });
 
     test('fireMouseEnter with group', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(
             <Radio.Group onMouseEnter={fn}>
                 <Radio value={1}>A</Radio>
@@ -56,7 +57,7 @@ describe("Test Radio's fire functions", () => {
      * @link fireMouseLeave
      */
     test('fireMouseLeave', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<Radio onMouseLeave={fn}>Radio</Radio>);
 
         radio.fireMouseLeave(container);
@@ -67,7 +68,7 @@ describe("Test Radio's fire functions", () => {
      * @link fireMouseLeave
      */
     test('fireMouseLeave with group', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(
             <Radio.Group onMouseLeave={fn}>
                 <Radio value={1}>A</Radio>
@@ -82,7 +83,7 @@ describe("Test Radio's fire functions", () => {
      * @link fireChange
      */
     test('fireChange', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(
             <Radio.Group onChange={fn} defaultValue={1}>
                 <Radio value="A">A</Radio>

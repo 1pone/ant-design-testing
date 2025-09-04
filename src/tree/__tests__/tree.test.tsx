@@ -3,6 +3,7 @@ import { render } from '@testing-library/react';
 import { Tree } from 'antd';
 import type { DataNode } from 'antd/es/tree';
 
+import { testFn } from '../../testFramework';
 import * as tree from '..';
 
 const treeData: DataNode[] = [
@@ -44,7 +45,7 @@ describe("Test Tree's fire functions", () => {
      * @link fireCheck
      */
     test('fireCheck', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<Tree checkable onCheck={fn} treeData={treeData} />);
 
         tree.fireCheck(container, 'parent 1');
@@ -55,7 +56,7 @@ describe("Test Tree's fire functions", () => {
      * @link fireExpand
      */
     test('fireExpand', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<Tree checkable onExpand={fn} treeData={treeData} />);
 
         tree.fireExpand(container, 'parent 1');
@@ -66,7 +67,7 @@ describe("Test Tree's fire functions", () => {
      * @link fireRightClick
      */
     test('fireRightClick', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<Tree checkable onRightClick={fn} treeData={treeData} />);
 
         tree.fireRightClick(container, 'parent 1');
@@ -77,7 +78,7 @@ describe("Test Tree's fire functions", () => {
      * @link fireSelect
      */
     test('fireSelect', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<Tree checkable onSelect={fn} treeData={treeData} />);
 
         tree.fireSelect(container, 'parent 1');
@@ -88,12 +89,12 @@ describe("Test Tree's fire functions", () => {
      * @link fireDrag
      */
     test('fireDrag', () => {
-        const onDragStart = jest.fn();
-        const onDragEnter = jest.fn();
-        const onDragOver = jest.fn();
-        const onDragLeave = jest.fn();
-        const onDrop = jest.fn();
-        const onDragEnd = jest.fn();
+        const onDragStart = testFn();
+        const onDragEnter = testFn();
+        const onDragOver = testFn();
+        const onDragLeave = testFn();
+        const onDrop = testFn();
+        const onDragEnd = testFn();
         const { container } = render(
             <Tree
                 treeData={treeData}

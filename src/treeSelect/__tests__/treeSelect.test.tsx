@@ -2,22 +2,23 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { TreeSelect } from 'antd';
 
+import { testFn, useFakeTimers, useRealTimers } from '../../testFramework';
 import * as treeSelect from '..';
 
 describe("Test treeSelect's fire functions", () => {
     beforeEach(() => {
-        jest.useFakeTimers();
+        useFakeTimers();
         document.body.innerHTML = '';
     });
     afterEach(() => {
-        jest.useRealTimers();
+        useRealTimers();
     });
 
     /**
      * @link fireOpen
      */
     test('fireOpen', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<TreeSelect onDropdownVisibleChange={fn} />);
 
         treeSelect.fireOpen(container);
@@ -28,7 +29,7 @@ describe("Test treeSelect's fire functions", () => {
      * @link fireSearch
      */
     test('fireSearch', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<TreeSelect onSearch={fn} />);
 
         treeSelect.fireSearch(container, 'test');
@@ -39,7 +40,7 @@ describe("Test treeSelect's fire functions", () => {
      * @link fireSelect
      */
     test('fireSelect', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const treeData = [
             {
                 title: 'Node1',
@@ -78,7 +79,7 @@ describe("Test treeSelect's fire functions", () => {
      * @link fireTreeExpand
      */
     test('fireTreeExpand', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const treeData = [
             {
                 title: 'Node1',
@@ -126,8 +127,8 @@ describe("Test treeSelect's fire functions", () => {
      * @link queryInput
      */
     test('queryInput', () => {
-        const fn1 = jest.fn();
-        const fn2 = jest.fn();
+        const fn1 = testFn();
+        const fn2 = testFn();
         const { container } = render(
             <>
                 <TreeSelect onSearch={fn1} />
@@ -144,8 +145,8 @@ describe("Test treeSelect's fire functions", () => {
      * @link querySelectorWrapper
      */
     test('querySelectorWrapper', () => {
-        const fn1 = jest.fn();
-        const fn2 = jest.fn();
+        const fn1 = testFn();
+        const fn2 = testFn();
         const { container } = render(
             <>
                 <TreeSelect onDropdownVisibleChange={fn1} />
@@ -178,7 +179,7 @@ describe("Test treeSelect's fire functions", () => {
                 ],
             },
         ];
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<TreeSelect treeData={treeData} onSelect={fn} />);
         treeSelect.fireOpen(treeSelect.querySelectorWrapper(container)!);
         treeSelect.fireSelect(treeSelect.queryDropdown(document)!, 0);
@@ -205,7 +206,7 @@ describe("Test treeSelect's fire functions", () => {
                 ],
             },
         ];
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(
             <TreeSelect
                 treeData={treeData}

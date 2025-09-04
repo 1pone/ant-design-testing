@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { Collapse } from 'antd';
 
+import { testFn } from '../../testFramework';
 import * as collapse from '..';
 
 describe("Test Collapse's fire functions", () => {
@@ -9,8 +10,8 @@ describe("Test Collapse's fire functions", () => {
      * @link query
      */
     test('query', () => {
-        const fn1 = jest.fn();
-        const fn2 = jest.fn();
+        const fn1 = testFn();
+        const fn2 = testFn();
         const items = [
             { key: '1', label: 'panel1', children: 'panel1' },
             { key: '2', label: 'panel2', children: 'panel2' },
@@ -59,7 +60,7 @@ describe("Test Collapse's fire functions", () => {
      * @link fireChange
      */
     test('fireChange', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const items = [
             { key: '1', label: 'panel1', children: 'panel1' },
             { key: '2', label: 'panel2', children: 'panel2' },

@@ -3,15 +3,16 @@ import { render } from '@testing-library/react';
 import { Button, Popconfirm } from 'antd';
 
 import * as button from '../../button';
+import { testFn, useFakeTimers, useRealTimers } from '../../testFramework';
 import * as confirm from '..';
 
 describe("Test popconfirm fire's functions", () => {
     beforeEach(() => {
-        jest.useFakeTimers();
+        useFakeTimers();
     });
 
     afterEach(() => {
-        jest.useRealTimers();
+        useRealTimers();
     });
 
     /**
@@ -44,7 +45,7 @@ describe("Test popconfirm fire's functions", () => {
      * @link queryCancelButton
      */
     test('queryCancelButton', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(
             <Popconfirm title="test" onCancel={fn} getPopupContainer={(node) => node.parentElement!}>
                 <Button danger>Delete</Button>
@@ -59,7 +60,7 @@ describe("Test popconfirm fire's functions", () => {
      * @link queryConfirmButton
      */
     test('queryConfirmButton', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(
             <Popconfirm title="test" onConfirm={fn} getPopupContainer={(node) => node.parentElement!}>
                 <Button danger>Delete</Button>
@@ -74,7 +75,7 @@ describe("Test popconfirm fire's functions", () => {
      * @link fireOpen
      */
     test('fireOpen', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(
             <Popconfirm title="test" onOpenChange={fn} getPopupContainer={(node) => node.parentElement!}>
                 <Button danger>Delete</Button>
@@ -88,7 +89,7 @@ describe("Test popconfirm fire's functions", () => {
      * @link fireCancel
      */
     test('fireCancel', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(
             <Popconfirm title="test" onCancel={fn} getPopupContainer={(node) => node.parentElement!}>
                 <Button danger>Delete</Button>
@@ -103,7 +104,7 @@ describe("Test popconfirm fire's functions", () => {
      * @link fireConfirm
      */
     test('fireConfirm', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(
             <Popconfirm title="test" onConfirm={fn} getPopupContainer={(node) => node.parentElement!}>
                 <Button danger>Delete</Button>

@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { Input } from 'antd';
 
+import { testFn } from '../../testFramework';
 import * as textarea from '../textarea';
 
 describe("Test textarea's fire functions", () => {
@@ -23,7 +24,7 @@ describe("Test textarea's fire functions", () => {
      * @link fireChange
      */
     test('fireChange', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<Input.TextArea onChange={fn} />);
         textarea.fireChange(container, 'test');
         expect(fn).toBeCalled();
@@ -33,7 +34,7 @@ describe("Test textarea's fire functions", () => {
      * @link fireFocus
      */
     test('fireFocus', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<Input.TextArea onFocus={fn} />);
         textarea.fireFocus(container);
         expect(fn).toBeCalled();
@@ -43,7 +44,7 @@ describe("Test textarea's fire functions", () => {
      * @link fireBlur
      */
     test('fireBlur', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<Input.TextArea onBlur={fn} />);
         textarea.fireBlur(container);
         expect(fn).toBeCalled();
@@ -53,7 +54,7 @@ describe("Test textarea's fire functions", () => {
      * @link fireClear
      */
     test('fireClear', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<Input.TextArea allowClear defaultValue="test" onChange={fn} />);
         textarea.fireClear(container);
         expect(fn).toBeCalled();
@@ -63,7 +64,7 @@ describe("Test textarea's fire functions", () => {
      * @link firePressEnter
      */
     test('firePressEnter', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const { container } = render(<Input.TextArea onPressEnter={fn} />);
         textarea.firePressEnter(container);
         expect(fn).toBeCalled();

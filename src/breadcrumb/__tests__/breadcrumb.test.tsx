@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { Breadcrumb } from 'antd';
 
+import { testFn } from '../../testFramework';
 import * as breadCrumb from '..';
 
 describe("Test breadcrumb's fire functions", () => {
@@ -9,7 +10,7 @@ describe("Test breadcrumb's fire functions", () => {
      * @link fireClick
      */
     test('test fireClick', () => {
-        const fn = jest.fn();
+        const fn = testFn();
         const items = [{ title: 'Foo' }, { title: 'Bar', onClick: fn }];
         const { container } = render(<Breadcrumb items={items} />);
         breadCrumb.fireClick(container, 1);
